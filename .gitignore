@@ -1,0 +1,12 @@
+
+.idea
+.pytest_cache
+*.pyc
+venv
+
+.env
+.coverage
+
+
+*.log
+output

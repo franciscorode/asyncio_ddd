@@ -1,0 +1,53 @@
+{
+    // Python env
+    "python.defaultInterpreterPath": "venv/bin/python3.8",
+    "python.envFile": "venv",
+    "python.terminal.activateEnvironment": true,
+    "python.terminal.activateEnvInCurrentTerminal": true,
+
+    // Editor settings
+    "explorer.autoReveal": false,
+    "workbench.editor.enablePreview": false,
+    "autoDocstring.docstringFormat": "sphinx",
+    "editor.rulers": [
+        90
+    ],
+    "workbench.colorCustomizations": {
+        "editorRuler.foreground": "#f7e8ed"
+    },
+    "python.autoComplete.addBrackets": false,
+    "python.languageServer": "Pylance",
+    "python.analysis.completeFunctionParens": true,
+    "editor.semanticHighlighting.enabled": false,
+
+    // Linters
+    "python.linting.enabled": true,
+    "python.linting.lintOnSave": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.pylintArgs": [
+        "--rcfile=setup.cfg",
+        "--ignore-paths=*test*.py"
+    ],
+    "python.linting.mypyEnabled": true,
+    "python.linting.mypyArgs": [
+        "--exclude 'tests'",
+    ],
+    "python.linting.flake8Enabled": true,
+
+    // Auto-save formatters
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true
+    },
+    "python.formatting.provider": "black",
+    
+    // Project settings
+    "python.autoComplete.extraPaths": [
+        "asyncio_ddd"
+    ],
+    "python.analysis.extraPaths": [
+        "asyncio_ddd"
+    ],
+
+    // Git
+    "git.inputValidationSubjectLength": 72
+}
