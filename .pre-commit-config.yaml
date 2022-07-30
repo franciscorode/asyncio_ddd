@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/hadialqattan/pycln
-    rev: v1.3.1
+    rev: v2.1.1
     hooks:
       - id: pycln
 
@@ -11,10 +11,10 @@ repos:
         args: ["--profile", "black"]
 
   - repo: https://github.com/ambv/black
-    rev: 22.3.0
+    rev: 22.6.0
     hooks:
       - id: black
-        language_version: python3.8
+        language_version: python3.10
 
   - repo: https://github.com/pycqa/flake8
     rev: 4.0.1
@@ -22,12 +22,12 @@ repos:
       - id: flake8
 
   - repo: https://github.com/pycqa/pylint
-    rev: v2.13.7
+    rev: v2.14.5
     hooks:
       - id: pylint
         args: ["--recursive=y"]
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v0.942
+    rev: v0.971
     hooks:
       - id: mypy

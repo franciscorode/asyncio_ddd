@@ -1,6 +1,6 @@
 {
     // Python env
-    "python.defaultInterpreterPath": "venv/bin/python3.8",
+    "python.defaultInterpreterPath": "venv/bin/python3.10",
     "python.envFile": "venv",
     "python.terminal.activateEnvironment": true,
     "python.terminal.activateEnvInCurrentTerminal": true,
@@ -15,7 +15,6 @@
     "workbench.colorCustomizations": {
         "editorRuler.foreground": "#f7e8ed"
     },
-    "python.autoComplete.addBrackets": false,
     "python.languageServer": "Pylance",
     "python.analysis.completeFunctionParens": true,
     "editor.semanticHighlighting.enabled": false,
@@ -41,12 +40,8 @@
     "python.formatting.provider": "black",
     
     // Project settings
-    "python.autoComplete.extraPaths": [
-        "asyncio_ddd"
-    ],
-    "python.analysis.extraPaths": [
-        "asyncio_ddd"
-    ],
+    "python.autoComplete.extraPaths": [],
+    "python.analysis.extraPaths": [],
 
     // Git
     "git.inputValidationSubjectLength": 72
