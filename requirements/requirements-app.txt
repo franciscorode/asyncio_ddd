@@ -1,0 +1,2 @@
+# Domain entities
+pydantic==1.9.1
