@@ -19,6 +19,13 @@ pipeline {
         }
       }
     }
+    stage('🐋 Up docker containers') {
+      steps {
+        script {
+          sh "make up"
+        }
+      }
+    }
     stage('✅ Run tests') {
       steps {
         script {
@@ -42,6 +49,9 @@ pipeline {
     }
     cleanup {
       cleanWs()
+    }
+    always {
+      sh "make down || true"
     }
   }
 }
