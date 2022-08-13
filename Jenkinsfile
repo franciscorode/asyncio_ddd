@@ -23,6 +23,7 @@ pipeline {
       steps {
         script {
           sh "cat .env.ci > .env"
+          sh "echo POSTGRES_HOST=${DOCKER_HOST_IP} >> .env"
           sh "make up"
         }
       }
