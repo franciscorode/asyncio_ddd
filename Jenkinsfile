@@ -22,6 +22,7 @@ pipeline {
     stage('🐋 Up docker containers') {
       steps {
         script {
+          sh "cat .env.ci > .env"
           sh "make up"
         }
       }
