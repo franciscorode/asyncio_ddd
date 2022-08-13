@@ -40,3 +40,19 @@ clean:
 	rm -f .coverage
 	rm -rf output
 	rm -rf .mypy_cache
+
+
+run:
+	python3 -m uvicorn asyncio_ddd.application:app --reload
+
+###############################
+###     DOCKER HELPERS      ###
+###############################
+
+up:
+	docker-compose ${DOCKER_COMPOSE_FILES} up --build -d
+
+down:
+	docker-compose ${DOCKER_COMPOSE_FILES} down
+
+downup: down up

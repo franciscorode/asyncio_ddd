@@ -19,6 +19,15 @@ pipeline {
         }
       }
     }
+    stage('🐋 Up docker containers') {
+      steps {
+        script {
+          sh "cat .env.ci > .env"
+          sh "echo POSTGRES_HOST=${DOCKER_HOST_IP} >> .env"
+          sh "make up"
+        }
+      }
+    }
     stage('✅ Run tests') {
       steps {
         script {
@@ -42,6 +51,9 @@ pipeline {
     }
     cleanup {
       cleanWs()
+    }
+    always {
+      sh "make down || true"
     }
   }
 }
