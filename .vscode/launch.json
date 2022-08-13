@@ -15,6 +15,17 @@
             ],
             "justMyCode": false
         },
+        {
+            "name": "Python: Fastapi",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "console": "integratedTerminal",
+            "args": [
+                "asyncio_ddd.application:app"
+            ],
+            "justMyCode": false
+        },
         
     ]
 }

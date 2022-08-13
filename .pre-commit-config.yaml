@@ -27,7 +27,11 @@ repos:
       - id: pylint
         additional_dependencies:
           - "pydantic"
-        args: ["--extension-pkg-allow-list=pydantic", "--recursive=y"]
+        args:
+          [
+            "--extension-pkg-allow-list=dependency_injector,pydantic",
+            "--recursive=y",
+          ]
 
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v0.971
@@ -35,3 +39,8 @@ repos:
       - id: mypy
         additional_dependencies:
           - "pydantic"
+          - "sqlalchemy"
+          - "pytest"
+          - "pytest_asyncio"
+          - "fastapi"
+          - "dependency_injector"
