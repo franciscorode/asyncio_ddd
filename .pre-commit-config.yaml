@@ -27,6 +27,7 @@ repos:
       - id: pylint
         additional_dependencies:
           - "pydantic"
+          - "dependency_injector"
         args:
           [
             "--extension-pkg-allow-list=dependency_injector,pydantic",

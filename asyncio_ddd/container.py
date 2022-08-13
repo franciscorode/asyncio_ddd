@@ -16,14 +16,16 @@ from asyncio_ddd.shared.infrastructure.persistence.sqlalchemy_database import (
 load_dotenv()
 
 
-# pylint: disable=no-member
 class Repositories(containers.DeclarativeContainer):
 
     config = providers.Configuration()
     database = providers.Singleton(SqlAlchemyDatabase)
 
     user_repository: providers.Provider[UserRepository] = (
-        providers.Factory(SqlUserRepository, session=database.provided.session_factory)
+        providers.Factory(
+            SqlUserRepository,
+            session=database.provided.session_factory,  # pylint: disable=no-member
+        )
         if os.getenv("USER_REPOSITORY_TYPE") != "FAKE"
         else providers.Factory(FakeUserRepository)
     )

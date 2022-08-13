@@ -36,7 +36,7 @@ class SqlAlchemyDatabase:
         self.session: sessionmaker[Session]
         self.session_factory: async_scoped_session
         self.engine: future.Engine
-        self.environment = EnvironmentName(os.getenv("ENVIRONMENT_NAME", "DEV"))
+        self.environment = EnvironmentName(os.getenv("APP_ENVIRONMENT", "DEV"))
         self.connection_url = self.get_connection_string()
         self.print_sql_statements = False
         self.remove_if_exist: bool = self.environment == EnvironmentName.TEST
