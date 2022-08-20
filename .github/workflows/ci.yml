@@ -14,6 +14,7 @@ env:
   POSTGRES_PASSWORD: root
   PGPASSWORD: root
   EXTERNAL_POSTGRES_PORT: 5432
+  POSTGRES_DB_NAME: asyncio_ddd
 
 jobs:
   build:
