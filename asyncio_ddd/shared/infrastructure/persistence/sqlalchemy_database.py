@@ -69,7 +69,7 @@ class SqlAlchemyDatabase:
         user: str = os.getenv("POSTGRES_USER", "user")
         password: str = os.getenv("POSTGRES_PASSWORD", "password")
         host: str = os.getenv("POSTGRES_HOST", "localhost")
-        port: int = int(os.getenv("EXTERNAL_POSTGRES_PORT", "5434"))
+        port: int = int(os.getenv("EXTERNAL_POSTGRES_PORT", "5432"))
         db_name: str = os.getenv("POSTGRES_DB_NAME", "asyncio_ddd")
         url: str = f"{server_name}+{driver}://{user}:{password}@{host}:{port}/{db_name}"
         return url
