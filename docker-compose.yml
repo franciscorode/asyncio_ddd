@@ -6,12 +6,12 @@ services:
     image: postgres:13.3
     restart: always
     environment:
-      POSTGRES_DB: ${POSTGRES_DB_NAME}
+      POSTGRES_DB: ${POSTGRES_DB_NAME:-asyncio_ddd}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       PGPASSWORD: ${POSTGRES_PASSWORD}
     ports:
-      - "${EXTERNAL_POSTGRES_PORT}:${INTERNAL_POSTGRES_PORT:-5432}"
+      - "${EXTERNAL_POSTGRES_PORT:-5432}:${INTERNAL_POSTGRES_PORT:-5432}"
     volumes:
       - vol_postgres:/var/lib/postgresql/data
       - ./docker/psql_dump.sql:/docker-entrypoint-initdb.d/psql_dump.sql
