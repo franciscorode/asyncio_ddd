@@ -27,12 +27,12 @@ format:
 	black ${PROJECT_NAME} tests
 
 lint:
-	pycln ${PROJECT_NAME} tests --check || true
-	flake8 ${PROJECT_NAME} tests || true
-	isort ${PROJECT_NAME} tests --check-only || true
-	black ${PROJECT_NAME} tests --check || true
-	mypy ${PROJECT_NAME} tests || true
-	pylint ${PROJECT_NAME} tests --recursive=y --exit-zero
+	pycln ${PROJECT_NAME} tests --check
+	flake8 ${PROJECT_NAME} tests
+	isort ${PROJECT_NAME} tests --check-only
+	black ${PROJECT_NAME} tests --check
+	mypy ${PROJECT_NAME} tests
+	pylint ${PROJECT_NAME} tests --recursive=y
 
 clean:
 	rm -rf .idea
