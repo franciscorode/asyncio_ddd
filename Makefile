@@ -32,7 +32,7 @@ lint:
 	isort ${PROJECT_NAME} tests --check-only
 	black ${PROJECT_NAME} tests --check
 	mypy ${PROJECT_NAME} tests
-	pylint ${PROJECT_NAME} tests --recursive=y --exit-zero
+	pylint ${PROJECT_NAME} tests --recursive=y
 
 clean:
 	rm -rf .idea
