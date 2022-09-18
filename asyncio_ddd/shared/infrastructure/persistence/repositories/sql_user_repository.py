@@ -1,10 +1,10 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from asyncio_ddd.create_user.domain.errors import UserAlreadyExistError
 from asyncio_ddd.shared.domain.user import User
 from asyncio_ddd.shared.domain.user_repository import UserRepository
 from asyncio_ddd.shared.infrastructure.persistence.models import UserSqlModel
+from asyncio_ddd.user.create.domain.errors import UserAlreadyExistError
 
 
 class SqlUserRepository(UserRepository):
