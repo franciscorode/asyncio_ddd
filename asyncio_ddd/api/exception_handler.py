@@ -3,7 +3,7 @@ from typing import Any, Union
 from fastapi import status
 from fastapi.responses import JSONResponse
 
-from asyncio_ddd.create_user.domain.errors import UserAlreadyExistError
+from asyncio_ddd.user.create.domain.errors import UserAlreadyExistError
 
 
 class CustomHTTPException:

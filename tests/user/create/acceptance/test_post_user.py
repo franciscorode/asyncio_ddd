@@ -3,11 +3,11 @@ from unittest.mock import patch
 import pytest
 from fastapi import status
 
-from asyncio_ddd.create_user.domain.errors import UserAlreadyExistError
 from asyncio_ddd.shared.domain.user import User
 from asyncio_ddd.shared.infrastructure.persistence.repositories import (
     FakeUserRepository,
 )
+from asyncio_ddd.user.create.domain.errors import UserAlreadyExistError
 from tests.shared.object_mothers.user_mother import UserMother
 
 

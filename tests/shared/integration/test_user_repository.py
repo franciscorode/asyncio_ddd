@@ -1,9 +1,9 @@
 import pytest
 
-from asyncio_ddd.create_user.domain.errors import UserAlreadyExistError
 from asyncio_ddd.shared.domain.user import User
 from asyncio_ddd.shared.domain.user_repository import UserRepository
 from asyncio_ddd.shared.infrastructure.persistence.repositories import SqlUserRepository
+from asyncio_ddd.user.create.domain.errors import UserAlreadyExistError
 from tests.shared.object_mothers.user_mother import UserMother
 
 

@@ -2,10 +2,10 @@ from unittest.mock import AsyncMock
 
 import pytest
 
-from asyncio_ddd.create_user.application.create_user import CreateUser
 from asyncio_ddd.shared.domain.event_bus import DomainEventBus
 from asyncio_ddd.shared.domain.user import User
 from asyncio_ddd.shared.domain.user_repository import UserRepository
+from asyncio_ddd.user.create.application.create_user import CreateUser
 from tests.shared.object_mothers.user_mother import UserMother
 
 

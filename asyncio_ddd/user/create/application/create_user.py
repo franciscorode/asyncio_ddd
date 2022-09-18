@@ -1,7 +1,7 @@
-from asyncio_ddd.create_user.domain.events import UserCreated
 from asyncio_ddd.shared.domain.event_bus import DomainEventBus
 from asyncio_ddd.shared.domain.user import User
 from asyncio_ddd.shared.domain.user_repository import UserRepository
+from asyncio_ddd.user.create.domain.events import UserCreated
 
 
 class CreateUser:
