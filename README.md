@@ -1,4 +1,4 @@
-# 🏎️ Asyncio DDD
+# ⚡ Asyncio DDD
 
 Example project using asyncio and DDD patterns
 
@@ -28,6 +28,10 @@ make install
 ```shell
 pre-commit install
 ```
+
+### 💾 DB migrations management
+
+- Database changes are managed with ⚗️ [alembic](https://alembic.sqlalchemy.org/en/latest/), for more ℹ️ details see [README](asyncio_ddd/shared/infrastructure/persistence/migrations/README.md)
 
 ## ✔️ Test
 
