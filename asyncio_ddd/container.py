@@ -41,3 +41,9 @@ class Container(containers.DeclarativeContainer):
     event_bus = providers.Singleton(FakeDomainEventBus)
     services = providers.Container(Services)
     repositories = providers.Container(Repositories)
+
+
+def init_dependencies() -> None:
+    container: containers.DeclarativeContainer = Container()
+    container.init_resources()
+    container.wire(packages=[__name__])

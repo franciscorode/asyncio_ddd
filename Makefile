@@ -1,4 +1,5 @@
 -include .env
+export
 export PYTHONPATH := $(shell pwd)
 export PROJECT_NAME = asyncio_ddd
 
@@ -56,3 +57,13 @@ down:
 	docker-compose ${DOCKER_COMPOSE_FILES} down
 
 downup: down up
+
+###############################
+### DB MIGRATIONS MANAGEMENT ##
+###############################
+
+create-migration:
+	alembic revision --autogenerate -m "$(m)"
+
+run-migrations:
+	alembic upgrade head
