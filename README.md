@@ -29,7 +29,19 @@ make install
 pre-commit install
 ```
 
-### 💾 DB migrations management
+## 🚀 Start application
+
+```shell
+make run
+```
+
+## 🌐 Web pages
+
+- [⚙️ Admin page](http://0.0.0.0:8000/admin/)
+- [📗 Api Swagger page](http://0.0.0.0:8000/docs/)
+- [📘 Api Redoc page](http://0.0.0.0:8000/redoc/)
+
+## 💾 DB migrations management
 
 - Database changes are managed with ⚗️ [alembic](https://alembic.sqlalchemy.org/en/latest/), for more ℹ️ details see [README](asyncio_ddd/shared/infrastructure/persistence/migrations/README.md)
 
@@ -41,17 +53,15 @@ make test
 
 ## 🧹 Lint
 
-The configured linters are:
-
-- pylint
-- flake8
-- mypy
+The current linters are [pylint](https://github.com/PyCQA/pylint), [flake8](https://github.com/PyCQA/flake8) and [mypy](https://github.com/python/mypy)
 
 ```shell
 make lint
 ```
 
 ## 🌟 Format
+
+The current code formatters are [black](https://github.com/psf/black) and [isort](https://github.com/PyCQA/isort)
 
 ```shell
 make format
