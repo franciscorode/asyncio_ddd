@@ -3,9 +3,9 @@ from fastapi import APIRouter, Depends, Response, status
 
 from asyncio_ddd.api.exception_handler import UserAlreadyExistHTTPError
 from asyncio_ddd.container import Container
-from asyncio_ddd.shared.domain.event_bus import DomainEventBus
-from asyncio_ddd.shared.domain.user import User
-from asyncio_ddd.shared.domain.user_repository import UserRepository
+from asyncio_ddd.shared.domain.buses.event_bus import DomainEventBus
+from asyncio_ddd.shared.domain.entities.user import User
+from asyncio_ddd.shared.domain.repositories.user_repository import UserRepository
 from asyncio_ddd.user.create.application.create_user import CreateUser
 
 router = APIRouter()

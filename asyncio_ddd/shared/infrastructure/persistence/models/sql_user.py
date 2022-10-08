@@ -4,7 +4,7 @@ from uuid import UUID
 
 from sqlalchemy import Column, Integer, String
 
-from asyncio_ddd.shared.domain.user import User
+from asyncio_ddd.shared.domain.entities.user import User
 from asyncio_ddd.shared.infrastructure.persistence.sqlalchemy_database import DB_BASE
 
 

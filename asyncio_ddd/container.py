@@ -3,8 +3,8 @@ import os
 from dependency_injector import containers, providers
 from dotenv import load_dotenv
 
-from asyncio_ddd.shared.domain.user_repository import UserRepository
-from asyncio_ddd.shared.infrastructure.fake_event_bus import FakeDomainEventBus
+from asyncio_ddd.shared.domain.repositories.user_repository import UserRepository
+from asyncio_ddd.shared.infrastructure.buses.fake_event_bus import FakeDomainEventBus
 from asyncio_ddd.shared.infrastructure.persistence.repositories import (
     FakeUserRepository,
     SqlUserRepository,
