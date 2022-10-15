@@ -2,6 +2,13 @@
 
 Example project using asyncio and DDD patterns
 
+## 💡 Motivation
+
+🎓 Consolidate and learn next patterns and technologies
+
+- 📦 Async python libraries: asyncio, fastapi, SQLAlchemy, alembic, aio-pika, etc
+- ♻️ Patterns: SOLID, DDD and CQRS
+
 ## 💻 Set up
 
 1. 🐱 Get the repository
