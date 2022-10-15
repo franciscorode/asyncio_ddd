@@ -16,3 +16,6 @@ dependency-injector==4.39.1
 fastapi==0.79.0
 sqladmin==0.6.1
 uvicorn==0.18.2
+
+# Events (rabbitmq)
+aio-pika==8.2.2
