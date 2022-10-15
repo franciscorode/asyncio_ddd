@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from asyncio_ddd.shared.domain.event import DomainEvent
+from asyncio_ddd.shared.domain.buses.event.domain_event import DomainEvent
 
 
 class DomainEventBus(ABC):

@@ -5,7 +5,7 @@ from asyncio_ddd.admin import create_admin
 from asyncio_ddd.api import user_endpoints
 from asyncio_ddd.api.exception_handler import handle_error
 from asyncio_ddd.container import Container
-from asyncio_ddd.shared.infrastructure.buses.rabbitmq_configurer import (
+from asyncio_ddd.shared.infrastructure.buses.event.rabbitmq.rabbitmq_configurer import (
     RabbitMqMessageStoreConfigurer,
 )
 

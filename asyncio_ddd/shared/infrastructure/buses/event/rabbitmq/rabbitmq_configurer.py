@@ -1,6 +1,6 @@
 import aio_pika
 
-from asyncio_ddd.shared.infrastructure.buses.rabbitmq_connection import (
+from asyncio_ddd.shared.infrastructure.buses.event.rabbitmq.rabbitmq_connection import (
     RabbitMqConnenction,
 )
 

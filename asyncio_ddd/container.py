@@ -3,10 +3,12 @@ import os
 from dependency_injector import containers, providers
 from dotenv import load_dotenv
 
-from asyncio_ddd.shared.domain.buses.event_bus import DomainEventBus
+from asyncio_ddd.shared.domain.buses.event.domain_event_bus import DomainEventBus
 from asyncio_ddd.shared.domain.repositories.user_repository import UserRepository
-from asyncio_ddd.shared.infrastructure.buses.fake_event_bus import FakeDomainEventBus
-from asyncio_ddd.shared.infrastructure.buses.rabbitmq_event_bus import (
+from asyncio_ddd.shared.infrastructure.buses.event.fake_event_bus import (
+    FakeDomainEventBus,
+)
+from asyncio_ddd.shared.infrastructure.buses.event.rabbitmq.rabbitmq_event_bus import (
     RabbitMqDomainEventBus,
 )
 from asyncio_ddd.shared.infrastructure.persistence.repositories import (
