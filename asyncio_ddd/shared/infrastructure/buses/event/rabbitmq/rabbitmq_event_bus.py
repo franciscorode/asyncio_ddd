@@ -1,4 +1,4 @@
-import aio_pika
+from aio_pika import DeliveryMode, Message
 
 from asyncio_ddd.shared.domain.buses.event.domain_event import DomainEvent
 from asyncio_ddd.shared.domain.buses.event.domain_event_bus import DomainEventBus
@@ -28,8 +28,12 @@ class RabbitMqDomainEventBus(DomainEventBus):
         connection = await RabbitMqConnenction.get()
         async with connection:
             channel = await connection.channel()
-            await channel.default_exchange.publish(
-                message=aio_pika.Message(body=domain_event.json().encode()),
+            exchange = await channel.get_exchange(self.exchange_name)
+            await exchange.publish(
+                message=Message(
+                    body=domain_event.json().encode(),
+                    delivery_mode=DeliveryMode.PERSISTENT,
+                ),
                 routing_key=routing_key,
             )
             await channel.close()
