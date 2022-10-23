@@ -1,4 +1,5 @@
 import aio_pika
+from aio_pika import ExchangeType
 
 from asyncio_ddd.shared.infrastructure.buses.event.rabbitmq.rabbitmq_connection import (
     RabbitMqConnenction,
@@ -31,11 +32,21 @@ class RabbitMqMessageStoreConfigurer:
     async def _configure_exchanges(self) -> None:
         connection = await RabbitMqConnenction.get()
         channel = await connection.channel()
-        await channel.declare_exchange(self._exchange_name)
-        await channel.declare_exchange(self._retry_exchange_name)
-        await channel.declare_exchange(self._dead_letter_exchange_name)
-        await channel.declare_exchange(self._common_retry_exchange_name)
-        await channel.declare_exchange(self._common_dead_letter_exchange_name)
+        await channel.declare_exchange(
+            name=self._exchange_name, type=ExchangeType.TOPIC
+        )
+        await channel.declare_exchange(
+            name=self._retry_exchange_name, type=ExchangeType.TOPIC
+        )
+        await channel.declare_exchange(
+            name=self._dead_letter_exchange_name, type=ExchangeType.TOPIC
+        )
+        await channel.declare_exchange(
+            name=self._common_retry_exchange_name, type=ExchangeType.TOPIC
+        )
+        await channel.declare_exchange(
+            name=self._common_dead_letter_exchange_name, type=ExchangeType.TOPIC
+        )
 
     async def _delete_exchange(self) -> None:
         connection = await RabbitMqConnenction.get()
