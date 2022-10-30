@@ -27,8 +27,8 @@ class RabbitMqMessageStoreConfigurer:
         )
 
     async def clear(self) -> None:
-        await self._delete_exchange()
-        await self._delete_queues()
+        await self.delete_exchanges()
+        await self.delete_queues()
 
     async def _configure_exchanges(self) -> None:
         connection = await RabbitMqConnection.get(connection_name=self.connection_name)
@@ -51,7 +51,7 @@ class RabbitMqMessageStoreConfigurer:
         await channel.close()
         await connection.close()
 
-    async def _delete_exchange(self) -> None:
+    async def delete_exchanges(self) -> None:
         connection = await RabbitMqConnection.get(connection_name=self.connection_name)
         channel = await connection.channel()
         await channel.exchange_delete(self._exchange_name)
@@ -62,7 +62,7 @@ class RabbitMqMessageStoreConfigurer:
         await channel.close()
         await connection.close()
 
-    async def _delete_queues(self) -> None:
+    async def delete_queues(self) -> None:
         connection = await RabbitMqConnection.get(connection_name=self.connection_name)
         channel = await connection.channel()
         await channel.queue_delete("store")
