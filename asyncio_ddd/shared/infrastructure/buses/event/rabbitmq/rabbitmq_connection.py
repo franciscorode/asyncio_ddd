@@ -4,7 +4,7 @@ import aio_pika
 from aio_pika import connect_robust
 
 
-class RabbitMqConnenction:
+class RabbitMqConnection:
     @staticmethod
     async def get(
         connection_name: str = "Application connection",

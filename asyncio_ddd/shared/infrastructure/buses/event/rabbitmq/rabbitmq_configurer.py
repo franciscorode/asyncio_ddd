@@ -2,7 +2,7 @@ import aio_pika
 from aio_pika import ExchangeType
 
 from asyncio_ddd.shared.infrastructure.buses.event.rabbitmq.rabbitmq_connection import (
-    RabbitMqConnenction,
+    RabbitMqConnection,
 )
 
 DEFAULT_RETRY_TTL: int = 5000
@@ -31,7 +31,7 @@ class RabbitMqMessageStoreConfigurer:
         await self._delete_queues()
 
     async def _configure_exchanges(self) -> None:
-        connection = await RabbitMqConnenction.get(connection_name=self.connection_name)
+        connection = await RabbitMqConnection.get(connection_name=self.connection_name)
         channel = await connection.channel()
         await channel.declare_exchange(
             name=self._exchange_name, type=ExchangeType.TOPIC
@@ -52,7 +52,7 @@ class RabbitMqMessageStoreConfigurer:
         await connection.close()
 
     async def _delete_exchange(self) -> None:
-        connection = await RabbitMqConnenction.get(connection_name=self.connection_name)
+        connection = await RabbitMqConnection.get(connection_name=self.connection_name)
         channel = await connection.channel()
         await channel.exchange_delete(self._exchange_name)
         await channel.exchange_delete(self._retry_exchange_name)
@@ -63,7 +63,7 @@ class RabbitMqMessageStoreConfigurer:
         await connection.close()
 
     async def _delete_queues(self) -> None:
-        connection = await RabbitMqConnenction.get(connection_name=self.connection_name)
+        connection = await RabbitMqConnection.get(connection_name=self.connection_name)
         channel = await connection.channel()
         await channel.queue_delete("store")
         await channel.queue_delete("retry.store")
@@ -78,7 +78,7 @@ class RabbitMqMessageStoreConfigurer:
         dead_letter_exchange_name: str,
     ) -> None:
 
-        connection = await RabbitMqConnenction.get(connection_name=self.connection_name)
+        connection = await RabbitMqConnection.get(connection_name=self.connection_name)
         channel = await connection.channel()
 
         store_queue = await self._declare_queue(

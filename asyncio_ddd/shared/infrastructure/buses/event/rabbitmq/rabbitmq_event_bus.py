@@ -3,7 +3,7 @@ from aio_pika import DeliveryMode, Message
 from asyncio_ddd.shared.domain.buses.event.domain_event import DomainEvent
 from asyncio_ddd.shared.domain.buses.event.domain_event_bus import DomainEventBus
 from asyncio_ddd.shared.infrastructure.buses.event.rabbitmq.rabbitmq_connection import (
-    RabbitMqConnenction,
+    RabbitMqConnection,
 )
 
 
@@ -26,7 +26,7 @@ class RabbitMqDomainEventBus(DomainEventBus):
         return f"{exchange_name}.{message_format}"
 
     async def __publish(self, domain_event: DomainEvent, routing_key: str) -> None:
-        connection = await RabbitMqConnenction.get(connection_name=self.connection_name)
+        connection = await RabbitMqConnection.get(connection_name=self.connection_name)
         async with connection:
             channel = await connection.channel()
             exchange = await channel.get_exchange(self.exchange_name)
