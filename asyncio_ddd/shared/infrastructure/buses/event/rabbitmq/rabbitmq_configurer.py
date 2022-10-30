@@ -16,6 +16,7 @@ class RabbitMqMessageStoreConfigurer:
         self._dead_letter_exchange_name = f"dead_letter.{self._exchange_name}"
         self._common_retry_exchange_name = f"retry.{organization}.store"
         self._common_dead_letter_exchange_name = f"dead_letter.{organization}.store"
+        self.connection_name = f"connection-configurer-{self._exchange_name}"
 
     async def execute(self) -> None:
         await self._configure_exchanges()
@@ -30,7 +31,7 @@ class RabbitMqMessageStoreConfigurer:
         await self._delete_queues()
 
     async def _configure_exchanges(self) -> None:
-        connection = await RabbitMqConnenction.get()
+        connection = await RabbitMqConnenction.get(connection_name=self.connection_name)
         channel = await connection.channel()
         await channel.declare_exchange(
             name=self._exchange_name, type=ExchangeType.TOPIC
@@ -49,7 +50,7 @@ class RabbitMqMessageStoreConfigurer:
         )
 
     async def _delete_exchange(self) -> None:
-        connection = await RabbitMqConnenction.get()
+        connection = await RabbitMqConnenction.get(connection_name=self.connection_name)
         channel = await connection.channel()
         await channel.exchange_delete(self._exchange_name)
         await channel.exchange_delete(self._retry_exchange_name)
@@ -58,7 +59,7 @@ class RabbitMqMessageStoreConfigurer:
         await channel.exchange_delete(self._common_dead_letter_exchange_name)
 
     async def _delete_queues(self) -> None:
-        connection = await RabbitMqConnenction.get()
+        connection = await RabbitMqConnenction.get(connection_name=self.connection_name)
         channel = await connection.channel()
         await channel.queue_delete("store")
         await channel.queue_delete("retry.store")
@@ -71,7 +72,7 @@ class RabbitMqMessageStoreConfigurer:
         dead_letter_exchange_name: str,
     ) -> None:
 
-        connection = await RabbitMqConnenction.get()
+        connection = await RabbitMqConnenction.get(connection_name=self.connection_name)
         channel = await connection.channel()
 
         store_queue = await self._declare_queue(

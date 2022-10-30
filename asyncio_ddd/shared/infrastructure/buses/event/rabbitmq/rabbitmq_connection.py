@@ -6,7 +6,9 @@ from aio_pika import connect_robust
 
 class RabbitMqConnenction:
     @staticmethod
-    async def get() -> aio_pika.abc.AbstractRobustConnection:
+    async def get(
+        connection_name: str = "Application connection",
+    ) -> aio_pika.abc.AbstractRobustConnection:
         try:
             host = os.environ.get("RABBITMQ_HOST", "localhost")
             return await connect_robust(
@@ -14,6 +16,7 @@ class RabbitMqConnenction:
                 port=int(os.environ.get("RABBITMQ_PORT", "5672")),
                 login=os.environ.get("RABBITMQ_USER", "guest"),
                 password=os.environ.get("RABBITMQ_PASSWORD", "guest"),
+                client_properties={"connection_name": connection_name},
             )
         except Exception as ex:
             raise ConnectionError(

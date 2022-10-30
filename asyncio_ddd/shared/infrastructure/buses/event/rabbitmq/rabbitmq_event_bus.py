@@ -11,6 +11,7 @@ class RabbitMqDomainEventBus(DomainEventBus):
     def __init__(self, organization: str, service: str):
         self.exchange_name = f"{organization}.{service}"
         self.rabbitmq_key = f"publisher-{self.exchange_name}"
+        self.connection_name = f"connection-{self.exchange_name}"
 
     async def publish(self, domain_event: DomainEvent) -> None:
         routing_key = self.__get_routing_key(
@@ -25,7 +26,7 @@ class RabbitMqDomainEventBus(DomainEventBus):
         return f"{exchange_name}.{message_format}"
 
     async def __publish(self, domain_event: DomainEvent, routing_key: str) -> None:
-        connection = await RabbitMqConnenction.get()
+        connection = await RabbitMqConnenction.get(connection_name=self.connection_name)
         async with connection:
             channel = await connection.channel()
             exchange = await channel.get_exchange(self.exchange_name)
