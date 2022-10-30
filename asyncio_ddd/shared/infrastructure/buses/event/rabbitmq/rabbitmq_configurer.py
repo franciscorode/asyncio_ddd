@@ -48,6 +48,8 @@ class RabbitMqMessageStoreConfigurer:
         await channel.declare_exchange(
             name=self._common_dead_letter_exchange_name, type=ExchangeType.TOPIC
         )
+        await channel.close()
+        await connection.close()
 
     async def _delete_exchange(self) -> None:
         connection = await RabbitMqConnenction.get(connection_name=self.connection_name)
@@ -57,6 +59,8 @@ class RabbitMqMessageStoreConfigurer:
         await channel.exchange_delete(self._dead_letter_exchange_name)
         await channel.exchange_delete(self._common_retry_exchange_name)
         await channel.exchange_delete(self._common_dead_letter_exchange_name)
+        await channel.close()
+        await connection.close()
 
     async def _delete_queues(self) -> None:
         connection = await RabbitMqConnenction.get(connection_name=self.connection_name)
@@ -64,6 +68,8 @@ class RabbitMqMessageStoreConfigurer:
         await channel.queue_delete("store")
         await channel.queue_delete("retry.store")
         await channel.queue_delete("dead_letter.store")
+        await channel.close()
+        await connection.close()
 
     async def _declare_queues(
         self,
