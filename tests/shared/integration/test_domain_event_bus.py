@@ -1,6 +1,5 @@
 import aiormq
 import pytest
-import requests
 
 from asyncio_ddd.shared.domain.buses.event.domain_event_bus import DomainEventBus
 from asyncio_ddd.shared.infrastructure.buses.event.rabbitmq.rabbitmq_configurer import (
@@ -12,20 +11,8 @@ from asyncio_ddd.shared.infrastructure.buses.event.rabbitmq.rabbitmq_event_bus i
 from tests.shared.object_mothers.user_created_mother import UserCreatedMother
 
 
-def rabbitmq_is_running_locally() -> bool:
-    try:
-        requests.get("http://localhost:15672/#/")
-    except requests.exceptions.ConnectionError:
-        return False
-    else:
-        return True
-
-
 @pytest.mark.asyncio
 @pytest.mark.integration
-@pytest.mark.skipif(
-    not rabbitmq_is_running_locally(), reason="RabbitMQ is not running locally"
-)
 class TestDomainEventBus:
     event_bus: DomainEventBus
     rabbit_configurer: RabbitMqMessageStoreConfigurer
