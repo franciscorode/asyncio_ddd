@@ -124,6 +124,7 @@ class RabbitMqMessageStoreConfigurer:
             routing_key="dead_letter.store",
         )
         await channel.close()
+        await connection.close()
 
     async def _declare_queue(
         self,
