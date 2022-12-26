@@ -17,6 +17,17 @@ services:
       - ./docker/psql_dump.sql:/docker-entrypoint-initdb.d/psql_dump.sql
     shm_size: "128mb"
 
+  rabbitmq:
+    image: rabbitmq:3.11.1-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
 
 volumes:
   vol_postgres:

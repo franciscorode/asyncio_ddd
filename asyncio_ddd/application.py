@@ -5,6 +5,9 @@ from asyncio_ddd.admin import create_admin
 from asyncio_ddd.api import user_endpoints
 from asyncio_ddd.api.exception_handler import handle_error
 from asyncio_ddd.container import Container
+from asyncio_ddd.shared.infrastructure.buses.event.rabbitmq.rabbitmq_configurer import (
+    RabbitMqMessageStoreConfigurer,
+)
 
 
 def create_app() -> FastAPI:
@@ -26,6 +29,16 @@ async def exception_handler(_: Request, exception: Exception) -> JSONResponse:
 @app.on_event("startup")
 async def startup_event() -> None:
     container = Container()
+
+    # Init database
     database = container.repositories.database()
     await database.create()
+
+    # Create admin page
     create_admin(app=app, database=database)
+
+    # Configure rabbit
+    rabbit_configurer = RabbitMqMessageStoreConfigurer(
+        organization="imageneratext", service="asyncio_ddd"
+    )
+    await rabbit_configurer.execute()
