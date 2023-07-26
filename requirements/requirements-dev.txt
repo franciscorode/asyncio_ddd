@@ -8,4 +8,4 @@ ruff==0.0.280
 mypy==1.4.1
 
 # Hooks
-pre-commit==2.20.0
+pre-commit==3.3.3
