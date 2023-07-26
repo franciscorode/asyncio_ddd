@@ -13,7 +13,7 @@ class TestUserRepository:
     user: User
     repository: UserRepository
 
-    def setup(self):
+    def setup_method(self):
         self.user = UserMother.random()
 
     def _get_repository(self, database):

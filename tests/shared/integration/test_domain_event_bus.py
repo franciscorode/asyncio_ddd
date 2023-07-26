@@ -17,7 +17,7 @@ class TestDomainEventBus:
     event_bus: DomainEventBus
     rabbit_configurer: RabbitMqMessageStoreConfigurer
 
-    def setup(self):
+    def setup_method(self):
         self.event_bus = RabbitMqDomainEventBus(organization="test-org", service="test")
         self.rabbit_configurer = RabbitMqMessageStoreConfigurer(
             organization="test-org", service="test"

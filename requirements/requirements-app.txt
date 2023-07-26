@@ -15,6 +15,7 @@ dependency-injector==4.39.1
 # API
 fastapi==0.79.0
 sqladmin==0.13.0
+    itsdangerous
 uvicorn==0.18.2
 
 # Events (rabbitmq)

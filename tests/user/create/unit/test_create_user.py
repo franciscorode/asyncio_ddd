@@ -18,7 +18,7 @@ class TestCreateUser:
     mock_event_bus: DomainEventBus
     user: User
 
-    def setup(self) -> None:
+    def setup_method(self) -> None:
         self.mock_user_repository = AsyncMock(UserRepository)
         self.mock_event_bus = AsyncMock(DomainEventBus)
         self.user = UserMother.random()

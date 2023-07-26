@@ -1,9 +1,8 @@
-pytest==7.1.2
-pytest-cov==3.0.0
-pytest-clarity==1.0.1
-pytest-env==0.6.2
-pytest-asyncio==0.19.0
-Faker==13.15.1
+pytest==7.4.0
+pytest-cov==4.1.0
+pytest-env==0.8.2
+pytest-asyncio==0.21.1
+Faker==19.2.0
 
 # https://github.com/tiangolo/fastapi/issues/2595
-requests==2.28.1
+requests==2.31.0
