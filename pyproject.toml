@@ -31,3 +31,67 @@ max-args = 25 # Maximum number of arguments for function/method
 
 [tool.ruff.flake8-bugbear]
 extend-immutable-calls = ["fastapi.Depends"]  # https://stackoverflow.com/a/74701417/9485417
+
+
+#########################
+######### Mypy ##########
+#########################
+
+[tool.mypy]
+
+plugins = ["sqlalchemy.ext.mypy.plugin"]
+
+strict = true
+
+# to avoid Duplicate module named "x"
+explicit_package_bases = true
+
+[[tool.mypy.overrides]]
+module = [
+  # We only check test clases, mothers and utils
+  "tests.*.unit.*",
+  "tests.*.integration.*",
+  "tests.*.acceptance.*",
+]
+ignore_errors = true
+
+
+#########################
+######## Pytest #########
+#########################
+[tool.pytest.ini_options]
+env = [
+    "D:APP_ENVIRONMENT=TEST",
+    "D:USER_REPOSITORY_TYPE=FAKE",
+    "D:DOMAIN_EVENT_BUS_TYPE=FAKE"
+]
+markers = [
+    "unit",
+    "integration",
+    "acceptance"
+]
+
+addopts = [
+    "tests",
+    "--cov-report=xml:output/coverage/coverage.xml",
+    "--cov=socialnetbot",
+    "--junitxml=output/tests/tests.xml",
+    "-v",
+    "--color=yes",
+    "--durations=10"
+]
+
+python_files = "test_*.py"
+python_functions = "test_* should_*"
+pythonpath = "."
+
+
+#########################
+####### Coverage ########
+#########################
+
+[tool.coverage.report]
+exclude_lines = [
+    "raise NotImplementedError()",
+    "if TYPE_CHECKING:",
+]
