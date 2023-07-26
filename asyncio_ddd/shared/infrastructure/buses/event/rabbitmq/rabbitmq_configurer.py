@@ -1,5 +1,6 @@
 import aio_pika
 from aio_pika import ExchangeType
+from pamqp.common import FieldValue
 
 from asyncio_ddd.shared.infrastructure.buses.event.rabbitmq.rabbitmq_connection import (
     RabbitMqConnection,
@@ -142,7 +143,7 @@ class RabbitMqMessageStoreConfigurer:
         message_ttl: int | None = None,
     ) -> aio_pika.abc.AbstractQueue:
 
-        queue_arguments: dict[str, str | int] = {}
+        queue_arguments: dict[str, FieldValue] = {}
         if dead_letter_exchange:
             queue_arguments["x-dead-letter-exchange"] = dead_letter_exchange
 
