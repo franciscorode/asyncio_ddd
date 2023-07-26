@@ -78,7 +78,6 @@ class RabbitMqMessageStoreConfigurer:
         retry_exchange_name: str,  # pylint: disable=unused-argument # TODO review
         dead_letter_exchange_name: str,
     ) -> None:
-
         connection = await RabbitMqConnection.get(connection_name=self.connection_name)
         channel = await connection.channel()
 
@@ -142,7 +141,6 @@ class RabbitMqMessageStoreConfigurer:
         dead_letter_routing_key: str | None = None,
         message_ttl: int | None = None,
     ) -> aio_pika.abc.AbstractQueue:
-
         queue_arguments: dict[str, FieldValue] = {}
         if dead_letter_exchange:
             queue_arguments["x-dead-letter-exchange"] = dead_letter_exchange

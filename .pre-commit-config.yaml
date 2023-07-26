@@ -38,6 +38,8 @@ repos:
     rev: v1.4.1
     hooks:
       - id: mypy
+        exclude: ^tests/
+        args: [--strict]
         additional_dependencies:
           - "pydantic"
           - "sqlalchemy"
@@ -45,3 +47,7 @@ repos:
           - "pytest_asyncio"
           - "fastapi"
           - "dependency_injector"
+          - "sqladmin"
+          - "alembic"
+          - "aio-pika"
+          - "python-dotenv"

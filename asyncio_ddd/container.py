@@ -23,7 +23,6 @@ load_dotenv()
 
 
 class Repositories(containers.DeclarativeContainer):
-
     config = providers.Configuration()
     database = providers.Singleton(SqlAlchemyDatabase)
 

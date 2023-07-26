@@ -13,7 +13,7 @@ def create_admin(
 ) -> None:
     admin = Admin(app, database.engine)
 
-    class UserAdmin(ModelAdmin, model=UserSqlModel):  # type: ignore
+    class UserAdmin(ModelAdmin, model=UserSqlModel):
         column_list = [UserSqlModel.user_id]
 
     admin.register_model(UserAdmin)
