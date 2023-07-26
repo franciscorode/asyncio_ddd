@@ -1,4 +1,4 @@
-from typing import Any, Union
+from typing import Any
 
 from fastapi import status
 from fastapi.responses import JSONResponse
@@ -17,7 +17,7 @@ class CustomHTTPException:
         )
 
     @classmethod
-    def to_open_api(cls) -> dict[Union[int, str], dict[str, Any]]:
+    def to_open_api(cls) -> dict[int | str, dict[str, Any]]:
         return {cls.status_code: {"description": cls.detail}}
 
 

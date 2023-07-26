@@ -1,4 +1,5 @@
 from unittest.mock import AsyncMock
+from uuid import uuid4
 
 import pytest
 
@@ -6,6 +7,7 @@ from asyncio_ddd.shared.domain.buses.event.domain_event_bus import DomainEventBu
 from asyncio_ddd.shared.domain.entities.user import User
 from asyncio_ddd.shared.domain.repositories.user_repository import UserRepository
 from asyncio_ddd.user.create.application.create_user import CreateUser
+from asyncio_ddd.user.create.domain.errors import UserAlreadyExistError
 from tests.shared.object_mothers.user_mother import UserMother
 
 
@@ -33,13 +35,16 @@ class TestCreateUser:
         self.mock_event_bus.publish.assert_called_once()
 
     async def should_not_publish_event_if_user_save_raise_an_error(self):
-        self.mock_user_repository.save.side_effect = Exception
+        self.mock_user_repository.save.side_effect = UserAlreadyExistError(
+            user_id=uuid4()
+        )
         self.mock_event_bus.publish = AsyncMock()
 
-        with pytest.raises(Exception):
+        with pytest.raises(UserAlreadyExistError):
             await CreateUser(
                 user_repository=self.mock_user_repository, event_bus=self.mock_event_bus
             ).execute(self.user)
 
         self.mock_user_repository.save.assert_called_once_with(user=self.user)
+        self.mock_event_bus.publish.assert_not_called()
         self.mock_event_bus.publish.assert_not_called()

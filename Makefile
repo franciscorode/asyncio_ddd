@@ -34,6 +34,7 @@ lint:
 	black ${PROJECT_NAME} tests --check
 	mypy ${PROJECT_NAME} tests
 	pylint ${PROJECT_NAME} tests --recursive=y
+	ruff check ${PROJECT_NAME} tests  || true
 
 clean:
 	rm -rf .idea

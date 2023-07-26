@@ -75,7 +75,7 @@ class RabbitMqMessageStoreConfigurer:
     async def _declare_queues(
         self,
         exchange_name: str,
-        retry_exchange_name: str,  # pylint: disable=unused-argument # TODO review
+        retry_exchange_name: str,  # pylint: disable=unused-argument # noqa: ARG002 TODO
         dead_letter_exchange_name: str,
     ) -> None:
         connection = await RabbitMqConnection.get(connection_name=self.connection_name)
