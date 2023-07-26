@@ -2,9 +2,9 @@
 pydantic==1.9.1
 
 # Database 
-sqlalchemy[asyncio]==1.4.39
+sqlalchemy[asyncio]==2.0.19
 asyncpg==0.26.0
-alembic==1.8.1
+alembic==1.11.1
 
 # Environment
 python-dotenv==0.20.0
@@ -14,7 +14,8 @@ dependency-injector==4.39.1
 
 # API
 fastapi==0.79.0
-sqladmin==0.6.1
+sqladmin==0.13.0
+    itsdangerous
 uvicorn==0.18.2
 
 # Events (rabbitmq)

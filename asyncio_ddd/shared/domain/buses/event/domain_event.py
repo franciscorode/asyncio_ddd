@@ -10,11 +10,11 @@ TIME_FORMAT = "%Y-%m-%d %H:%M:%S.%f"
 
 
 class DomainEvent(BaseModel):
-    name: str
+    name: str = "domain.event"
     event_id: UUID = Field(default_factory=uuid4)
     version: int = 1
     occurred_on: datetime = Field(default_factory=datetime.utcnow)
-    attributes: dict[str, Any]
+    attributes: dict[str, Any] = {}
     meta: dict[str, Any] = {}
 
     def __init__(self, **kwargs: Any) -> None:

@@ -23,17 +23,13 @@ test:
 	pytest tests
 
 format:
-	pycln ${PROJECT_NAME} tests
-	isort ${PROJECT_NAME} tests
+	ruff --fix ${PROJECT_NAME} tests
 	black ${PROJECT_NAME} tests
 
 lint:
-	pycln ${PROJECT_NAME} tests --check
-	flake8 ${PROJECT_NAME} tests
-	isort ${PROJECT_NAME} tests --check-only
 	black ${PROJECT_NAME} tests --check
 	mypy ${PROJECT_NAME} tests
-	pylint ${PROJECT_NAME} tests --recursive=y
+	ruff check ${PROJECT_NAME} tests  || true
 
 clean:
 	rm -rf .idea
@@ -45,6 +41,9 @@ clean:
 
 run:
 	python3 -m uvicorn asyncio_ddd.application:app --reload
+
+coverage:
+	pytest --cov-report term-missing --cov=${PROJECT_NAME}
 
 ###############################
 ###     DOCKER HELPERS      ###

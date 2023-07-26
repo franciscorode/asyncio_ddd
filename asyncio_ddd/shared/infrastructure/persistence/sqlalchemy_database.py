@@ -6,19 +6,18 @@ from asyncio import current_task
 from enum import Enum
 from typing import Any
 
-from sqlalchemy import future
-from sqlalchemy.engine.base import Transaction
 from sqlalchemy.ext.asyncio import (
+    AsyncEngine,
     AsyncSession,
+    AsyncTransaction,
     async_scoped_session,
+    async_sessionmaker,
     create_async_engine,
 )
-from sqlalchemy.ext.declarative import DeclarativeMeta, declarative_base
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.orm.session import Session
+from sqlalchemy.orm import DeclarativeMeta, declarative_base
 
 
-class DeclarativeABCMeta(DeclarativeMeta, ABCMeta):  # type: ignore
+class DeclarativeABCMeta(DeclarativeMeta, ABCMeta):
     pass
 
 
@@ -33,9 +32,9 @@ class EnvironmentName(Enum):
 
 class SqlAlchemyDatabase:
     def __init__(self) -> None:
-        self.session: sessionmaker[Session]
-        self.session_factory: async_scoped_session
-        self.engine: future.Engine
+        self.session: async_sessionmaker[AsyncSession]
+        self.session_factory: async_scoped_session[AsyncSession]
+        self.engine: AsyncEngine
         self.environment = EnvironmentName(os.getenv("APP_ENVIRONMENT", "DEV"))
         self.connection_url = self.get_connection_string()
         self.print_sql_statements = False
@@ -48,7 +47,6 @@ class SqlAlchemyDatabase:
             json_serializer=lambda obj: obj,
             json_deserializer=lambda obj: obj,
             echo=self.print_sql_statements,
-            future=True,
         )
 
         if self.remove_if_exist:
@@ -56,8 +54,7 @@ class SqlAlchemyDatabase:
                 await conn.run_sync(DB_BASE.metadata.drop_all)
                 await conn.run_sync(DB_BASE.metadata.create_all)
 
-        DB_BASE.metadata.bind = self.engine
-        self.session = sessionmaker(bind=self.engine, future=True, class_=AsyncSession)
+        self.session = async_sessionmaker(bind=self.engine, class_=AsyncSession)
         self.session_factory = async_scoped_session(
             self.session, scopefunc=current_task
         )
@@ -76,7 +73,7 @@ class SqlAlchemyDatabase:
 
     async def clear(self) -> None:
         async with self.engine.connect() as connection:
-            transaction: Transaction = await connection.begin()
+            transaction: AsyncTransaction = await connection.begin()
             for table in reversed(DB_BASE.metadata.sorted_tables):
                 await connection.execute(table.delete())
             await transaction.commit()

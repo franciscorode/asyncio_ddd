@@ -60,7 +60,7 @@ make test
 
 ## 🧹 Lint
 
-The current linters are [pylint](https://github.com/PyCQA/pylint), [flake8](https://github.com/PyCQA/flake8) and [mypy](https://github.com/python/mypy)
+The current linters are [ruff](https://github.com/astral-sh/ruff) and [mypy](https://github.com/python/mypy)
 
 ```shell
 make lint
@@ -68,7 +68,7 @@ make lint
 
 ## 🌟 Format
 
-The current code formatters are [black](https://github.com/psf/black) and [isort](https://github.com/PyCQA/isort)
+The current code formatter is [black](https://github.com/psf/black)
 
 ```shell
 make format

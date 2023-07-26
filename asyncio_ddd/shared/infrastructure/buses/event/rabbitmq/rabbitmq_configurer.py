@@ -1,5 +1,6 @@
 import aio_pika
 from aio_pika import ExchangeType
+from pamqp.common import FieldValue
 
 from asyncio_ddd.shared.infrastructure.buses.event.rabbitmq.rabbitmq_connection import (
     RabbitMqConnection,
@@ -74,10 +75,9 @@ class RabbitMqMessageStoreConfigurer:
     async def _declare_queues(
         self,
         exchange_name: str,
-        retry_exchange_name: str,  # pylint: disable=unused-argument # TODO review
+        retry_exchange_name: str,  # noqa: ARG002 # TODO REVIEW
         dead_letter_exchange_name: str,
     ) -> None:
-
         connection = await RabbitMqConnection.get(connection_name=self.connection_name)
         channel = await connection.channel()
 
@@ -141,8 +141,7 @@ class RabbitMqMessageStoreConfigurer:
         dead_letter_routing_key: str | None = None,
         message_ttl: int | None = None,
     ) -> aio_pika.abc.AbstractQueue:
-
-        queue_arguments: dict[str, str | int] = {}
+        queue_arguments: dict[str, FieldValue] = {}
         if dead_letter_exchange:
             queue_arguments["x-dead-letter-exchange"] = dead_letter_exchange
 

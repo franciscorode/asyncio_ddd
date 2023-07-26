@@ -1,5 +1,6 @@
 import asyncio
-from typing import Any, Generator
+from collections.abc import Generator
+from typing import Any
 
 import pytest
 import pytest_asyncio
@@ -30,7 +31,7 @@ class Singleton(type):
 
     def __call__(cls, *args: Any, **kwargs: Any) -> Any:
         if cls not in cls._instances:
-            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+            cls._instances[cls] = super().__call__(*args, **kwargs)
         return cls._instances[cls]
 
 

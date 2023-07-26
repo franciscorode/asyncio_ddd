@@ -23,15 +23,11 @@ load_dotenv()
 
 
 class Repositories(containers.DeclarativeContainer):
-
     config = providers.Configuration()
     database = providers.Singleton(SqlAlchemyDatabase)
 
     user_repository: providers.Provider[UserRepository] = (
-        providers.Factory(
-            SqlUserRepository,
-            session=database.provided.session_factory,  # pylint: disable=no-member
-        )
+        providers.Factory(SqlUserRepository, session=database.provided.session_factory)
         if os.getenv("USER_REPOSITORY_TYPE") != "FAKE"
         else providers.Factory(FakeUserRepository)
     )

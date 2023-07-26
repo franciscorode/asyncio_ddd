@@ -1,43 +1,16 @@
 repos:
-  - repo: https://github.com/hadialqattan/pycln
-    rev: v2.1.1
-    hooks:
-      - id: pycln
-
-  - repo: https://github.com/pycqa/isort
-    rev: 5.10.1
-    hooks:
-      - id: isort
-        args: ["--profile", "black"]
-
   - repo: https://github.com/ambv/black
-    rev: 22.6.0
+    rev: 23.7.0
     hooks:
       - id: black
         language_version: python3.10
 
-  - repo: https://github.com/pycqa/flake8
-    rev: 4.0.1
-    hooks:
-      - id: flake8
-
-  - repo: https://github.com/pycqa/pylint
-    rev: v2.14.5
-    hooks:
-      - id: pylint
-        additional_dependencies:
-          - "pydantic"
-          - "dependency_injector"
-        args:
-          [
-            "--extension-pkg-allow-list=dependency_injector,pydantic",
-            "--recursive=y",
-          ]
-
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v0.971
+    rev: v1.4.1
     hooks:
       - id: mypy
+        exclude: ^tests/
+        args: [--strict]
         additional_dependencies:
           - "pydantic"
           - "sqlalchemy"
@@ -45,3 +18,14 @@ repos:
           - "pytest_asyncio"
           - "fastapi"
           - "dependency_injector"
+          - "sqladmin"
+          - "alembic"
+          - "aio-pika"
+          - "python-dotenv"
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.0.280
+    hooks:
+      - id: ruff
+        args: [--fix]
+        exclude: "src"

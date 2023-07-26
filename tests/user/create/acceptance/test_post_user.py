@@ -15,7 +15,7 @@ from tests.shared.object_mothers.user_mother import UserMother
 class TestPostUser:
     user: User
 
-    def setup(self):
+    def setup_method(self):
         self.user = UserMother.random()
 
     def should_post_an_user_and_return_201(self, test_client):
