@@ -74,7 +74,7 @@ markers = [
 addopts = [
     "tests",
     "--cov-report=xml:output/coverage/coverage.xml",
-    "--cov=socialnetbot",
+    "--cov=asyncio_ddd",
     "--junitxml=output/tests/tests.xml",
     "-v",
     "--color=yes",

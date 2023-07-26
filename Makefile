@@ -42,6 +42,9 @@ clean:
 run:
 	python3 -m uvicorn asyncio_ddd.application:app --reload
 
+coverage:
+	pytest --cov-report term-missing --cov=${PROJECT_NAME}
+
 ###############################
 ###     DOCKER HELPERS      ###
 ###############################
