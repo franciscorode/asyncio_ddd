@@ -1,11 +1,7 @@
 # Formatters
 black==23.7.0
-isort==5.10.1
-pycln==2.1.1
 
 # Linters
-flake8==4.0.1
-pylint==2.14.5
 ruff==0.0.280
 
 # Typing code check

@@ -1,4 +1,3 @@
-# pylint: disable=invalid-name
 """initial migration
 
 Revision ID:9db626d0eb84

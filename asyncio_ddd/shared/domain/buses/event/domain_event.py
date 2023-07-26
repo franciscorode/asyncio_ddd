@@ -39,9 +39,7 @@ class DomainEvent(BaseModel):
                 "id": str(self.event_id),
                 "type": self.name,
                 "version": self.version,
-                "occurred_on": self.occurred_on.strftime(  # pylint: disable=no-member
-                    TIME_FORMAT
-                ),
+                "occurred_on": self.occurred_on.strftime(TIME_FORMAT),
                 "attributes": self._get_serialized_attributes(),
                 "meta": self.meta,
             }
