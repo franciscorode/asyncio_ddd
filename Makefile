@@ -37,6 +37,7 @@ clean:
 	rm -f .coverage
 	rm -rf output
 	rm -rf .mypy_cache
+	rm -rf .ruff_cache
 
 
 run:
