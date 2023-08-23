@@ -4,10 +4,10 @@ Example project using asyncio and DDD patterns
 
 ## 💡 Motivation
 
-🎓 Consolidate and learn next patterns and technologies
+🎓 Consolidate next patterns and technologies
 
-- 📦 Async python libraries: asyncio, fastapi, SQLAlchemy, alembic, aio-pika, etc
-- ♻️ Patterns: SOLID, DDD and CQRS
+- 📦 Asyncio python libraries: fastapi, SQLAlchemy, alembic, aio-pika, etc
+- ♻️ Patterns: SOLID, DDD, CQRS and Event sourcing
 
 ## 💻 Set up
 
@@ -20,7 +20,7 @@ git clone git@github.com:imageneratext/asyncio_ddd.git
 2. 🏗️ Create a virtual environment (e.g. with virtualenv)
 
 ```shell
-python3.10 -m venv venv
+python3.11 -m venv venv
 . venv/bin/activate
 ```
 
