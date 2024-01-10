@@ -4,6 +4,7 @@ from fastapi import status
 from fastapi.responses import JSONResponse
 
 from asyncio_ddd.user.create.domain.errors import UserAlreadyExistError
+from asyncio_ddd.user.retrieve.domain.errors import UserNotFoundError
 
 
 class CustomHTTPException:
@@ -26,7 +27,14 @@ class UserAlreadyExistHTTPError(CustomHTTPException):
     detail = "User already exist"
 
 
+class UserNotFoundHTTPError(CustomHTTPException):
+    status_code = status.HTTP_404_NOT_FOUND
+    detail = "User not found"
+
+
 def handle_error(exception: Exception) -> JSONResponse:
     if isinstance(exception, UserAlreadyExistError):
         return UserAlreadyExistHTTPError.to_json_response()
+    if isinstance(exception, UserNotFoundError):
+        return UserNotFoundHTTPError.to_json_response()
     return CustomHTTPException.to_json_response()
