@@ -36,7 +36,7 @@ jobs:
         run: make lint
 
       - name: 🐋 Start environment
-        run: make up && sleep 30
+        run: make up && sleep 60
 
       - name: ✅ Tests
         run: make test
