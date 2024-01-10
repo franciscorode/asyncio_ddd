@@ -11,26 +11,28 @@ target-version = "py311"
 line-length = 88
 
 select = [
-    "E",  # pycodestyle errors
-    "W",  # pycodestyle warnings
-    "F",  # pyflakes
-    "I",  # isort
-    "C",  # flake8-comprehensions
-    "B",  # flake8-bugbear
-    "UP", # pyupgrade
-    "PL", # pylint
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "C",   # flake8-comprehensions
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+    "PL",  # pylint
     "ARG", # flake8-unused-arguments
 ]
 
 ignore = [
-    "E501",  # line too long, handled by black
+    "E501", # line too long, handled by black
 ]
 
 [tool.ruff.pylint]
 max-args = 25 # Maximum number of arguments for function/method
 
 [tool.ruff.flake8-bugbear]
-extend-immutable-calls = ["fastapi.Depends"]  # https://stackoverflow.com/a/74701417/9485417
+extend-immutable-calls = [
+    "fastapi.Depends",
+] # https://stackoverflow.com/a/74701417/9485417
 
 
 #########################
@@ -43,15 +45,17 @@ plugins = ["sqlalchemy.ext.mypy.plugin"]
 
 strict = true
 
+exclude = ["venv"]
+
 # to avoid Duplicate module named "x"
 explicit_package_bases = true
 
 [[tool.mypy.overrides]]
 module = [
-  # We only check test clases, mothers and utils
-  "tests.*.unit.*",
-  "tests.*.integration.*",
-  "tests.*.acceptance.*",
+    # We only check test clases, mothers and utils
+    "tests.*.unit.*",
+    "tests.*.integration.*",
+    "tests.*.acceptance.*",
 ]
 ignore_errors = true
 
@@ -63,13 +67,9 @@ ignore_errors = true
 env = [
     "D:APP_ENVIRONMENT=TEST",
     "D:USER_REPOSITORY_TYPE=FAKE",
-    "D:DOMAIN_EVENT_BUS_TYPE=FAKE"
+    "D:DOMAIN_EVENT_BUS_TYPE=FAKE",
 ]
-markers = [
-    "unit",
-    "integration",
-    "acceptance"
-]
+markers = ["unit", "integration", "acceptance"]
 
 addopts = [
     "tests",
@@ -78,7 +78,7 @@ addopts = [
     "--junitxml=output/tests/tests.xml",
     "-v",
     "--color=yes",
-    "--durations=10"
+    "--durations=10",
 ]
 
 python_files = "test_*.py"
@@ -91,7 +91,4 @@ pythonpath = "."
 #########################
 
 [tool.coverage.report]
-exclude_lines = [
-    "raise NotImplementedError()",
-    "if TYPE_CHECKING:",
-]
+exclude_lines = ["raise NotImplementedError()", "if TYPE_CHECKING:"]
