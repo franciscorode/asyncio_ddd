@@ -13,7 +13,7 @@ python-dotenv==0.20.0
 dependency-injector==4.39.1
 
 # API
-fastapi==0.79.0
+fastapi==0.90.0
 sqladmin==0.13.0
     itsdangerous
 uvicorn==0.18.2

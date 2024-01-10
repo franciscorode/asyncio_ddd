@@ -6,3 +6,4 @@ Faker==19.2.0
 
 # https://github.com/tiangolo/fastapi/issues/2595
 requests==2.31.0
+httpx==0.26.0
