@@ -2,7 +2,7 @@
 black==23.7.0
 
 # Linters
-ruff==0.0.280
+ruff==0.1.11
 
 # Typing code check
 mypy==1.4.1
