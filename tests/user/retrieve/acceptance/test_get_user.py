@@ -23,7 +23,7 @@ class TestPostUser:
         response = test_client.get(f"/user/{self.user.user_id}")
 
         assert response.status_code == status.HTTP_200_OK
-        assert response.json() == json.loads(self.user.json())
+        assert response.json() == json.loads(self.user.model_dump_json())
 
     def should_return_404_when_get_an_user_that_does_not_exist(self, test_client):
         with patch.object(

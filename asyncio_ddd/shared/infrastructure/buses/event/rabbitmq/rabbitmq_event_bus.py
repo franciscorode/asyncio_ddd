@@ -32,7 +32,7 @@ class RabbitMqDomainEventBus(DomainEventBus):
             exchange = await channel.get_exchange(self.exchange_name)
             await exchange.publish(
                 message=Message(
-                    body=domain_event.json().encode(),
+                    body=domain_event.model_dump_json().encode(),
                     delivery_mode=DeliveryMode.PERSISTENT,
                 ),
                 routing_key=routing_key,
