@@ -19,7 +19,7 @@ class TestPostUser:
         self.user = UserMother.random()
 
     def should_post_an_user_and_return_201(self, test_client):
-        response = test_client.post("/user", data=self.user.json())
+        response = test_client.post("/user", data=self.user.model_dump_json())
 
         assert response.status_code == status.HTTP_201_CREATED
 
@@ -29,6 +29,6 @@ class TestPostUser:
             "save",
             side_effect=UserAlreadyExistError(user_id=self.user.user_id),
         ):
-            response = test_client.post("/user", data=self.user.json())
+            response = test_client.post("/user", data=self.user.model_dump_json())
 
         assert response.status_code == status.HTTP_409_CONFLICT

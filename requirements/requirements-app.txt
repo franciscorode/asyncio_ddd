@@ -1,22 +1,21 @@
 # Domain entities
-pydantic==1.9.1
+pydantic==2.5.3
 
 # Database 
-sqlalchemy[asyncio]==2.0.19
-asyncpg==0.26.0
-alembic==1.11.1
+sqlalchemy[asyncio]==2.0.25
+asyncpg==0.29.0
+alembic==1.13.1
 
 # Environment
-python-dotenv==0.20.0
+python-dotenv==1.0.0
 
 # DI
-dependency-injector==4.39.1
+dependency-injector==4.41.0
 
 # API
-fastapi==0.90.0
-sqladmin==0.13.0
-    itsdangerous
-uvicorn==0.18.2
+fastapi==0.108.0
+sqladmin==0.16.0
+uvicorn==0.25.0
 
 # Events (rabbitmq)
-aio-pika==8.2.2
+aio-pika==9.3.1

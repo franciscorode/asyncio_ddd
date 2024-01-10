@@ -1,3 +1,6 @@
+from collections.abc import AsyncGenerator
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
@@ -10,24 +13,15 @@ from asyncio_ddd.shared.infrastructure.buses.event.rabbitmq.rabbitmq_configurer 
 )
 
 
-def create_app() -> FastAPI:
-    container = Container()
-    application = FastAPI()
-    application.container = container  # type: ignore
-    application.include_router(user_endpoints.router)
-    return application
+@asynccontextmanager
+async def lifespan(_: FastAPI) -> AsyncGenerator[None, None]:
+    # startup
+    await startup()
+    yield
+    # shutdown
 
 
-app = create_app()
-
-
-@app.exception_handler(Exception)
-async def exception_handler(_: Request, exception: Exception) -> JSONResponse:
-    return handle_error(exception=exception)
-
-
-@app.on_event("startup")
-async def startup_event() -> None:
+async def startup() -> None:
     container = Container()
 
     # Init database
@@ -42,3 +36,19 @@ async def startup_event() -> None:
         organization="imageneratext", service="asyncio_ddd"
     )
     await rabbit_configurer.execute()
+
+
+def create_app() -> FastAPI:
+    container = Container()
+    application = FastAPI(lifespan=lifespan)
+    application.container = container  # type: ignore
+    application.include_router(user_endpoints.router)
+    return application
+
+
+app = create_app()
+
+
+@app.exception_handler(Exception)
+async def exception_handler(_: Request, exception: Exception) -> JSONResponse:
+    return handle_error(exception=exception)
