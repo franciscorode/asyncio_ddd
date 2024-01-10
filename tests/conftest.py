@@ -15,7 +15,7 @@ from asyncio_ddd.shared.infrastructure.persistence.sqlalchemy_database import (
 
 @pytest.fixture
 def test_client() -> TestClient:
-    return TestClient(app, raise_server_exceptions=False)
+    return TestClient(app, raise_server_exceptions=True)
 
 
 @pytest.fixture(scope="session")
