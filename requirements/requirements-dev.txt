@@ -1,11 +1,11 @@
 # Formatters
-black==23.7.0
+black==23.12.1
 
 # Linters
 ruff==0.1.11
 
 # Typing code check
-mypy==1.4.1
+mypy==1.8.0
 
 # Hooks
-pre-commit==3.3.3
+pre-commit==3.6.0
