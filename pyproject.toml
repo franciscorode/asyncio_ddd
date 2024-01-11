@@ -1,5 +1,7 @@
 [project]
+name = "asyncio_ddd"
 requires-python = "<=3.11"
+version = "0.0.0"
 
 
 #########################
@@ -56,6 +58,8 @@ module = [
     "tests.*.unit.*",
     "tests.*.integration.*",
     "tests.*.acceptance.*",
+
+    "asyncio_ddd.*.versions.*",
 ]
 ignore_errors = true
 
