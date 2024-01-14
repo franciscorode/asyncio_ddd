@@ -18,7 +18,7 @@ class TestUserRepository:
         self.user = UserMother.random()
 
     def _get_repository(self, database):
-        return SqlUserRepository(session=database.session_factory)
+        return SqlUserRepository(session=database.session_scope)
 
     async def should_create_a_user_successfully(self, database):
         self.repository = self._get_repository(database)

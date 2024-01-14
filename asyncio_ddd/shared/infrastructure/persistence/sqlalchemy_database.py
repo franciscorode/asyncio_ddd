@@ -2,7 +2,8 @@ from __future__ import annotations
 
 import os
 from abc import ABCMeta
-from asyncio import current_task
+from collections.abc import AsyncIterator
+from contextlib import asynccontextmanager
 from enum import Enum
 from typing import Any
 
@@ -10,7 +11,6 @@ from sqlalchemy.ext.asyncio import (
     AsyncEngine,
     AsyncSession,
     AsyncTransaction,
-    async_scoped_session,
     async_sessionmaker,
     create_async_engine,
 )
@@ -33,7 +33,6 @@ class EnvironmentName(Enum):
 class SqlAlchemyDatabase:
     def __init__(self) -> None:
         self.session: async_sessionmaker[AsyncSession]
-        self.session_factory: async_scoped_session[AsyncSession]
         self.engine: AsyncEngine
         self.environment = EnvironmentName(os.getenv("APP_ENVIRONMENT", "DEV"))
         self.connection_url = self.get_connection_string()
@@ -55,9 +54,6 @@ class SqlAlchemyDatabase:
                 await conn.run_sync(DB_BASE.metadata.create_all)
 
         self.session = async_sessionmaker(bind=self.engine, class_=AsyncSession)
-        self.session_factory = async_scoped_session(
-            self.session, scopefunc=current_task
-        )
 
     @staticmethod
     def get_connection_string() -> str:
@@ -78,3 +74,16 @@ class SqlAlchemyDatabase:
                 await connection.execute(table.delete())
             await transaction.commit()
         await self.engine.dispose()
+
+    @asynccontextmanager
+    async def session_scope(self) -> AsyncIterator[AsyncSession]:
+        """Provide a transactional scope around a series of operations."""
+        session = self.session()
+        try:
+            yield session
+            await session.commit()
+        except Exception as exception:
+            await session.rollback()
+            raise exception
+        finally:
+            await session.close()
