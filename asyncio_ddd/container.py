@@ -27,7 +27,7 @@ class Repositories(containers.DeclarativeContainer):
     database = providers.Singleton(SqlAlchemyDatabase)
 
     user_repository: providers.Provider[UserRepository] = (
-        providers.Factory(SqlUserRepository, session=database.provided.session_factory)
+        providers.Factory(SqlUserRepository, session=database.provided.session_scope)
         if os.getenv("USER_REPOSITORY_TYPE") != "FAKE"
         else providers.Factory(FakeUserRepository)
     )
