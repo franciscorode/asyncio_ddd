@@ -58,8 +58,6 @@ module = [
     "tests.*.unit.*",
     "tests.*.integration.*",
     "tests.*.acceptance.*",
-
-    "asyncio_ddd.*.versions.*",
 ]
 ignore_errors = true
 
