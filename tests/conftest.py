@@ -1,4 +1,5 @@
 import asyncio
+import os
 from collections.abc import Generator
 from typing import Any
 
@@ -6,6 +7,7 @@ import pytest
 import pytest_asyncio
 from dotenv import load_dotenv
 from fastapi.testclient import TestClient
+from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine
 
 from asyncio_ddd.application import app
 from asyncio_ddd.shared.infrastructure.persistence.sqlalchemy_database import (
@@ -16,6 +18,19 @@ from asyncio_ddd.shared.infrastructure.persistence.sqlalchemy_database import (
 @pytest.fixture
 def test_client() -> TestClient:
     return TestClient(app, raise_server_exceptions=False)
+
+
+# Pytest alembic fixtures
+
+
+@pytest.fixture
+def alembic_config() -> dict[str, str]:
+    return {"file": os.getenv("ALEMBIC_CONFIG", "alembic.ini")}
+
+
+@pytest.fixture()
+def alembic_engine() -> AsyncEngine:
+    return create_async_engine(SqlAlchemyDatabase.get_connection_string())
 
 
 @pytest.fixture(scope="session")
