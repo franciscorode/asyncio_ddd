@@ -72,6 +72,7 @@ env = [
     "D:APP_ENVIRONMENT=TEST",
     "D:USER_REPOSITORY_TYPE=FAKE",
     "D:DOMAIN_EVENT_BUS_TYPE=FAKE",
+    "D:ALEMBIC_CONFIG=asyncio_ddd/shared/infrastructure/persistence/alembic.ini",
 ]
 markers = ["unit", "integration", "acceptance"]
 
@@ -83,6 +84,8 @@ addopts = [
     "-v",
     "--color=yes",
     "--durations=10",
+    "--pythonwarnings=error::sqlalchemy.exc.SAWarning", # to detect problems in migrations
+    "--test-alembic",
 ]
 
 python_files = "test_*.py"
