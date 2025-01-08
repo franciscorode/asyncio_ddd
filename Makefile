@@ -9,27 +9,25 @@ help:
 	@$(MAKE) -pRrq -f $(lastword $(MAKEFILE_LIST)) : 2>/dev/null | awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | sort | egrep -v -e '^[^[:alnum:]]' -e '^$@$$'
 
 install:
-	python3 -m pip install --upgrade pip
-	pip3 install -r requirements/requirements-app.txt -r requirements/requirements-dev.txt -r requirements/requirements-test.txt
+	poetry install
 
 install-app:
-	python3 -m pip install --upgrade pip
-	pip3 install -r requirements/requirements-app.txt
+	poetry install --no-dev --no-test
 
 uninstall:
 	pip3 freeze | xargs pip3 uninstall -y
 
 test:
-	pytest tests
+	poetry run pytest tests
 
 format:
-	ruff --fix ${PROJECT_NAME} tests
-	black ${PROJECT_NAME} tests
+	poetry run ruff --fix ${PROJECT_NAME} tests
+	poetry run black ${PROJECT_NAME} tests
 
 lint:
-	black ${PROJECT_NAME} tests --check
-	mypy ${PROJECT_NAME} tests
-	ruff check ${PROJECT_NAME} tests  || true
+	poetry run black ${PROJECT_NAME} tests --check
+	poetry run mypy ${PROJECT_NAME} tests
+	poetry run ruff check ${PROJECT_NAME} tests  || true
 
 clean:
 	rm -rf .idea
@@ -41,10 +39,10 @@ clean:
 
 
 run:
-	python3 -m uvicorn asyncio_ddd.application:app --reload
+	poetry run python3 -m uvicorn asyncio_ddd.application:app --reload
 
 coverage:
-	pytest --cov-report term-missing --cov=${PROJECT_NAME}
+	poetry run pytest --cov-report term-missing --cov=${PROJECT_NAME}
 
 wait-postgres:
 	while ! curl http://localhost:5432/ 2>&1 | grep -q '52'; do sleep 1; done;
