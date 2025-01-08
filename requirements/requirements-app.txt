@@ -10,7 +10,7 @@ alembic==1.13.1
 python-dotenv==1.0.0
 
 # DI
-dependency-injector==4.41.0
+dependency-injector==4.45.0
 
 # API
 fastapi==0.108.0

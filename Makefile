@@ -57,10 +57,10 @@ wait-rabbitmq:
 ###############################
 
 up:
-	docker-compose ${DOCKER_COMPOSE_FILES} up --build -d
+	docker compose ${DOCKER_COMPOSE_FILES} up --build -d
 
 down:
-	docker-compose ${DOCKER_COMPOSE_FILES} down
+	docker compose ${DOCKER_COMPOSE_FILES} down
 
 downup: down up
 

@@ -20,7 +20,7 @@ git clone git@github.com:imageneratext/asyncio_ddd.git
 2. 🏗️ Create a virtual environment (e.g. with virtualenv)
 
 ```shell
-python3.11 -m venv venv
+python3.12 -m venv venv
 . venv/bin/activate
 ```
 
@@ -35,6 +35,16 @@ make install
 ```shell
 pre-commit install
 ```
+
+## 🌎 Create .env file with next variables
+
+- POSTGRES_DB_NAME
+- POSTGRES_USER
+- POSTGRES_PASSWORD
+- PGPASSWORD
+- EXTERNAL_POSTGRES_PORT
+- APP_ENVIRONMENT
+- ALEMBIC_CONFIG
 
 ## 🚀 Start application
 
@@ -55,6 +65,7 @@ make run
 ## ✔️ Test
 
 ```shell
+make up
 make test
 ```
 
