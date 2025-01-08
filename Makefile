@@ -21,7 +21,7 @@ test:
 	poetry run pytest tests
 
 format:
-	poetry run ruff --fix ${PROJECT_NAME} tests
+	poetry run ruff format ${PROJECT_NAME} tests
 	poetry run black ${PROJECT_NAME} tests
 
 lint:
@@ -67,7 +67,7 @@ downup: down up
 ###############################
 
 create-migration:
-	alembic revision --autogenerate -m "$(m)"
+	poetry run alembic revision --autogenerate -m "$(m)"
 
 run-migrations:
-	alembic upgrade head
+	poetry run alembic upgrade head
