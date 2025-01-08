@@ -9,12 +9,10 @@ help:
 	@$(MAKE) -pRrq -f $(lastword $(MAKEFILE_LIST)) : 2>/dev/null | awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | sort | egrep -v -e '^[^[:alnum:]]' -e '^$@$$'
 
 install:
-	python3 -m pip install --upgrade pip
-	pip3 install -r requirements/requirements-app.txt -r requirements/requirements-dev.txt -r requirements/requirements-test.txt
+	poetry install
 
 install-app:
-	python3 -m pip install --upgrade pip
-	pip3 install -r requirements/requirements-app.txt
+	poetry install --no-dev --no-test
 
 uninstall:
 	pip3 freeze | xargs pip3 uninstall -y

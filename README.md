@@ -17,17 +17,16 @@ Example project using asyncio and DDD patterns
 git clone git@github.com:imageneratext/asyncio_ddd.git
 ```
 
-2. 🏗️ Create a virtual environment (e.g. with virtualenv)
+2. 🏗️ Create a virtual environment
 
 ```shell
-python3.12 -m venv venv
-. venv/bin/activate
+poetry shell
 ```
 
 3. 📥 Install the dependencies
 
 ```shell
-make install
+poetry install
 ```
 
 4. 🔛 Enable pre-commit hooks
