@@ -18,16 +18,16 @@ uninstall:
 	pip3 freeze | xargs pip3 uninstall -y
 
 test:
-	pytest tests
+	poetry run pytest tests
 
 format:
-	ruff --fix ${PROJECT_NAME} tests
-	black ${PROJECT_NAME} tests
+	poetry run ruff --fix ${PROJECT_NAME} tests
+	poetry run black ${PROJECT_NAME} tests
 
 lint:
-	black ${PROJECT_NAME} tests --check
-	mypy ${PROJECT_NAME} tests
-	ruff check ${PROJECT_NAME} tests  || true
+	poetry run black ${PROJECT_NAME} tests --check
+	poetry run mypy ${PROJECT_NAME} tests
+	poetry run ruff check ${PROJECT_NAME} tests  || true
 
 clean:
 	rm -rf .idea
@@ -39,10 +39,10 @@ clean:
 
 
 run:
-	python3 -m uvicorn asyncio_ddd.application:app --reload
+	poetry run python3 -m uvicorn asyncio_ddd.application:app --reload
 
 coverage:
-	pytest --cov-report term-missing --cov=${PROJECT_NAME}
+	poetry run pytest --cov-report term-missing --cov=${PROJECT_NAME}
 
 wait-postgres:
 	while ! curl http://localhost:5432/ 2>&1 | grep -q '52'; do sleep 1; done;
